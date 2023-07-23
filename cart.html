@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cart Page</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+        
+        .cart-item img {
+            max-width: 300px;
+            max-height: 300px;
+        }
+        
+        .cart-item .name {
+            font-weight: bold;
+        }
+        
+        .cart-item .price {
+            color: green;
+        }
+        
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 align="center">Shopping Cart</h1>
+
+    <div id="cart-items">
+      
+    </div>
+
+    <div id="cart-total">
+        <h2>Total:</h2>
+        <p id="total-amount">0</p>
+    </div>
+
+    <script>
+        
+        var cartItems = [
+            {
+                name: 'Product 1',
+                price: 1000,
+                image: 's1.jpg'
+            },
+            {
+                name: 'Product 2',
+                price: 1500,
+                image: 's2.jpg'
+            },
+            {
+                name: 'Product 3',
+                price: 2000,
+                image: 's3.jpg'
+            }
+        ];
+
+        
+        function calculateTotal() {
+            var total = 0;
+            for (var i = 0; i < cartItems.length; i++) {
+                total += cartItems[i].price;
+            }
+            return total;
+        }
+
+       
+        function renderCartItems() {
+            var cartItemsDiv = document.getElementById('cart-items');
+            var totalAmount = document.getElementById('total-amount');
+
+            
+            cartItemsDiv.innerHTML = '';
+
+           
+            for (var i = 0; i < cartItems.length; i++) {
+                var cartItem = cartItems[i];
+
+                var itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+
+                var image = document.createElement('img');
+                image.src = cartItem.image;
+
+                var name = document.createElement('p');
+                name.className = 'name';
+                name.innerHTML = cartItem.name;
+
+                var price = document.createElement('p');
+                price.className = 'price';
+                price.innerHTML = 'Rs.' + cartItem.price;
+
+                itemDiv.appendChild(image);
+                itemDiv.appendChild(name);
+                itemDiv.appendChild(price);
+
+                cartItemsDiv.appendChild(itemDiv);
+            }
+
+       
+            totalAmount.innerHTML = calculateTotal();
+        }
+
+        
+        window.onload = function () {
+            renderCartItems();
+        };
+    </script>
+</body>
+
+</html>
